@@ -1,0 +1,883 @@
+import random
+import math
+import os
+password = "[><]!"
+def login():
+    password_guess = input("Enter password: ")
+    if password_guess == password:
+        print("Welcome")
+        error()
+        home()
+    else:
+        print("Strike one! Try again")
+        login2()
+def login2():
+    password_guess = input("Enter password: ")
+    if password_guess == password:
+        print("Welcome")
+        error()
+        home()
+    else:
+        print("Strike two! Try again")
+        login3()
+def login3():
+    password_guess = input("Enter password: ")
+    if password_guess == password:
+        print("Welcome")
+        error()
+        home()
+    else:
+        print("Strike three! Your out!")
+        lockout()
+def lockout():
+    block = input()
+    if block == "home()":
+        print("You have been locked out.")
+        lockout()
+    else:
+        print("You have been locked out.")
+        lockout()
+
+def exclusive():
+    print("""
+You can type 'y' and 'n' instead of 'yes' and 'no'.
+===================================================
+Typing 'sm' in the home menu, and pressing 'enter', will bring you to the secret menu.
+===================================================
+In rock paper scissors always win, '1 for rock, 2 for paper 3 for scissors', means that the cpu chose paper.
+If it said '1 for rock, 2 for paper, 3 for scissors', that would mean the cpu chose scissors.
+Whichever one is missing the comma or colon, in front of it, is the one that the cpu chose.
+===================================================""")
+    exite()
+def exite():
+    leave = input("""enter '0' go to the home menu
+enter 'sm' to visit the secret menu
+""")
+    if leave == "0":
+        home()
+    elif leave == "sm":
+        secret_menu()
+    else:
+        print("Not a valid input")
+        exite()
+
+def secret_menu():
+    print("""
+'a101' For tab-delimited
+'a102' For how many kittens
+'a103' For pick a card
+'a104' For rock paper scissors always win
+'a105' For idea jar
+'0' To exit
+""")
+    sselection = input()
+    if sselection == "a101":
+        tab_delim()
+    elif sselection == "a102":
+        kittens()
+    elif sselection == "a103":
+        pick_card()
+    elif sselection == "a104":
+        rps2()
+    elif sselection == "a105":
+        idea_jar()
+    elif sselection == "ex":
+        exclusive()
+    elif sselection == "0":
+        home()
+    else:
+        print("Not a valid input.")
+        secret_menu()
+def error():
+    print("If there is an error, type 'home()', and hit 'Enter', to restart.")
+
+
+def home():
+    selection = input("""
+'1' For Coin Flip
+'2' For Dice Roll
+'3' For Rock Paper Scissors
+'4' For Mad Libs
+'5' For Lottery
+
+'A' For Pizza Calculator
+'B' For tax/tip calculator
+'C' For temperature converter
+'D' For mile/kilometer converter
+'E' To exit
+
+'Q' To logout
+
+""")
+    if selection == "q" or selection == "Q":
+        login()
+    elif selection == "0":
+        print("goodbye!")
+        quit()
+    elif selection == "1":
+        flip()
+    elif selection == "2":
+        roll()
+    elif selection == "a" or selection == "A":
+        main()
+    elif selection == "3":
+        rps()
+    elif selection == "4":
+        play1()
+    elif selection == "5":
+        loto()
+    elif selection == "sm":
+        secret_menu()
+    elif selection == "a101":
+        tab_delim()
+    elif selection == "a102":
+        kittens()
+    elif selection == "a103":
+        pick_card()
+    elif selection =="a104":
+        rps2()
+    elif selection == "ex":
+        exclusive()
+    elif selection == "b" or selection == "B":
+        tax_calc()
+    elif selection == "c" or selection == "C":
+        temp_choose()
+    elif selection == "a105":
+        idea_jar()
+    elif selection == "d" or selection == "D":
+        unit_choose()
+    elif selection == "e" or selection == "E":
+        print("See you next time!")
+        quit()
+    else:
+        print("Not a valid input.")
+        home()
+
+#coin flip
+
+def replay_flip():
+    repeat_flip = input("Would you like to flip again? ")
+    if repeat_flip == "yes" or repeat_flip == "y":
+         flip()
+    elif repeat_flip == "no" or repeat_flip == "n":
+        print("Goodbye!")
+        home()
+    else:
+        print("Please answer 'yes' or 'no'")
+        replay_flip()
+def flip():
+    coin = random.randint(1,2)
+    if coin == 1:
+         print("Heads")
+    if coin == 2:
+        print("Tails")
+    replay_flip()
+
+
+
+#dice roll
+
+def replay_roll():
+    repeat_roll = input("Would you like to roll again? ")
+    if repeat_roll == 'yes' or repeat_roll == 'y':
+        roll()
+    elif repeat_roll == 'no' or repeat_roll == 'n':
+        print("Goodbye!")
+        home()
+    else:
+        print("Please answer 'yes' or 'no'")
+        replay_roll()
+
+def roll():
+    dice_num = input("How many dice? ")
+    roll_em(int(dice_num))
+
+def roll_em(x):
+    die = random.randint(x,x*6)
+    print(die)
+    replay_roll()
+
+#how many pizzas
+def replay_pizza():
+    repeat_pizza = input("Would you like to go again? ")
+    if repeat_pizza == "yes" or repeat_pizza == 'y':
+        main()
+    elif repeat_pizza == "no" or repeat_pizza == 'n':
+        print("Goodbye!")
+        home()
+    else:
+        print("Please answer 'yes' or 'no'")
+        replay_pizza()
+def calculate_slices(people, slices_per_person):
+    return people * slices_per_person
+
+def calculate_pizzas(slices, slices_per_pie):
+    return math.ceil(slices / slices_per_pie)
+
+def calculate_slices_left(slices_per_pie, pizzas, slices):
+    total_slices = slices_per_pie *pizzas
+    return total_slices - slices
+def main():
+    people = int(input('How many people? '))
+    slices_per_person = float(input('How many slices per person? '))
+    slices = calculate_slices(people, slices_per_person)
+
+    slices_per_pie = int(input('How many slices per pie? '))
+    pizzas = calculate_pizzas(slices,slices_per_pie )
+    print('YOU WILL NEED', pizzas, ' PIZZAS, to feed', people, ' people.')
+    slices_left = calculate_slices_left(slices_per_pie, pizzas, slices)
+    print('There will be ', int(slices_left), ' leftover slices.')
+    replay_pizza()
+    
+#rock paper scissors
+
+# the game
+def rps():
+    cpu = random.randint(1,3)
+    if cpu == 1:
+        cpu_rock() # defined below
+    elif cpu == 2:
+        cpu_paper() # defined below
+    else:
+        cpu_scissors() # defined below
+    
+# if cpu chooses rock
+def cpu_rock():
+    player_choice = input("1 for rock, 2 for paper, 3 for scissors: ")
+    if player_choice == "1":
+        print("Tie. Rock vs rock.")
+        replay_rps() # defined below
+    if player_choice == "2":
+        print("Win. Paper vs rock")
+        replay_rps() # defined below
+    if player_choice == "3":
+        print("Lose. Scissors vs rock")
+        replay_rps() # defined below
+    else:
+        print("Please enter '1' '2' or '3'")
+        cpu_rock()
+
+# if cpu chooses paper
+def cpu_paper():
+    player_choice = input("1 for rock, 2 for paper, 3 for scissors: ")
+    if player_choice == "1":
+        print("Lose. Rock vs paper.")
+        replay_rps() # defined below
+    if player_choice == "2":
+        print("Tie. Paper vs paper")
+        replay_rps() # defined below
+    if player_choice == "3":
+        print("Win. Scissors vs paper")
+        replay_rps() # defined below
+    else:
+        print("Please enter '1' '2' or '3'")
+        cpu_paper()
+
+# if cpu chooses scissors
+def cpu_scissors():
+    player_choice = input("1 for rock, 2 for paper, 3 for scissors: ")
+    if player_choice == "1":
+        print("Win. Rock vs scissors.")
+        replay_rps() # defined below
+    if player_choice == "2":
+        print("Lose. Paper vs scissors")
+        replay_rps() # defined below
+    if player_choice == "3":
+        print("Tie. Scissors vs scissors")
+        replay_rps() # defined below
+    else:
+        print("Please enter '1' '2' or '3'")
+        cpu_scissors()
+
+# try again function
+def replay_rps():
+    repeat_rps = input("Would you like to play again? ")
+    if repeat_rps == "y" or repeat_rps == "yes":
+        rps()
+    elif repeat_rps == "n" or repeat_rps =="no":
+        print("Thanks for playing!")
+        home()
+    else:
+        print("Please answer 'yes' or 'no'")
+        replay_rps()
+
+#mad lib
+
+# normal play
+def play1():
+    cpu = random.randint(1,3)
+    if cpu == 1:
+        madlib1()
+    elif cpu == 2:
+        madlib2()
+    else:
+        madlib3()
+#if the madlib 1 was just played
+def play2():
+    cpu = random.randint(1,2)
+    if cpu == 1:
+        madlib2()
+    elif cpu == 2:
+        madlib3()
+#if madlib 2 was just played
+def play3():
+    cpu = random.randint(1,2)
+    if cpu == 1:
+        madlib1()
+    elif cpu == 2:
+        madlib3()
+#if mad lib 3 was just played
+def play4():
+    cpu = random.randint(1,2)
+    if cpu == 1:
+        madlib1()
+    elif cpu == 2:
+        madlib2()
+def play_again1():
+#plays play2
+    replay = input("Would you like to play again? ")
+    if replay == "yes" or replay == 'y':
+        play2()
+    elif replay == "no" or replay == 'n':
+        print("Thanks for playing!")
+        home()
+    else:
+        print("please answer 'yes' or 'no'")
+        play_again1() 
+def play_again2():
+#plays play3
+    replay = input("Would you like to play again? ")
+    if replay == "yes" or replay == 'y':
+        play3()
+    elif replay == "no" or replay == 'n':
+        print("Thanks for playing!")
+        home()
+    else:
+        print("please answer 'yes' or 'no'")
+        play_again2()
+
+def play_again3():
+#plays play4
+    replay = input("Would you like to play again? ")
+    if replay == "yes" or replay == 'y':
+        play4()
+    elif replay == "no" or replay == 'n':
+        print("Thanks for playing!")
+        home()
+    else:
+        print("please answer 'yes' or 'no'")
+        play_again3()
+        
+def madlib1():
+    
+    verb1 = input("Enter a verb ening in 'ing': ")
+    adjective1 = input("Enter an adjective: ")
+    number1 = input("Enter a number: ")
+    number1 = str(number1)
+    adjective2 = input("Enter an adjective: ")
+    place1 = input("Enter a place: ")
+    adjective3 = input("Enter an adjective: ")
+    noun1 = input("Enter a plural noun: ")
+    adjective4 = input("Enter an adjective: ")
+    adjective5 = input("Enter an adjective: ")
+    color1 = input("Enter a color: ")
+    color2 = input("Enter a color: ")
+    adjective6 = input("Enter an adjective: ")
+    adjective7 = input("Enter an adjective: ")
+    adjective8 = input("Just three left! Enter an adjective: ")
+    adjective9 = input("Enter an adjective: ")
+    noun2 = input("Enter a plural noun: ")
+    noun3 = input("Last one! Enter a noun: ")
+    print("YOUR MADLIB:")
+    print("If you like to go " + verb1 + " in " + adjective1 + "\
+ caves that are " + number1 + " feet underground, you should\
+ go to the " + adjective2  + " Mammoth caves located in\
+ " + place1 + ". Thousands of " + adjective3 +" " + noun1 + "\
+ go there every summer.Crawling about in caves is called\
+ 'spelunking.'And it is really a/an " + adjective4 + " sport.\
+ But always go with a/an " + adjective5 + " guide\
+ so you won't get lost. Once in the cave, you will see beutiful\
+  " + color1 + " and " + color2 + " rocks and crystals. Huge\
+ " + adjective6 + " things hang from the ceiling and are called\
+ 'stalagtites'. huge " + adjective7 + " jut up from the floor\
+ and are called 'stalagmites'. Caves are homes for millions of\
+ " + adjective8 + " bats. Bats can fly and look like\
+ " +adjective9 + " rats. spelunking is dangerous so be sure to\
+ bring special shoes with " + noun2 + " on them and a hat with\
+ a battery powered " + noun3 + ".")
+    play_again1()
+    
+def madlib2():
+    
+    adjective = input("Enter an adjective: ")
+    noun = input("Enter a noun: ")
+    verb1 = input("Enter a verb: ")
+    verb2 = input("Enter a verb: ")
+    print("YOUR MADLIB:")
+    print ("My ", adjective, noun, "likes to ",verb1, "and,", verb2,".")
+    play_again2()
+
+def madlib3():
+    
+    verb1 = input("Enter a verb ending in 'ing': ")
+    verb2 = input("Enter a verb ending in 'ing': ")
+    noun1 = input("Enter a plural noun: ")
+    verb3 = input("Enter a verb: ")
+    noun2 = input("Enter a plural noun: ")
+    noun3 = input("Enter a noun: ")
+    noun4 = input("Enter a plural noun: ")
+    animal = input("Enter an animal: ")
+    nat = input("Enter a nationality: ")
+    noun5 = input("Enter a noun: ")
+    adjective1 = input("Just three left! Enter an adjective: ")
+    color = input("Enter a color: ")
+    adjective2 = input("Enter an adjective: ")
+    person = input("Last one! Enter a person in the room: ")
+    print("YOUR MADLIB:")
+    print ("Swimming is easier than " + verb1 + " or " + verb2 + ".\
+ There are more Americans who swim than there are " + noun1 + " who \
+" + verb3 + ". This is because many Americans have swimming\
+ " + noun2 + " It's not hard to swim.\
+ First you learn to float on your " + noun3 + ". Then you prctice\
+ kicking your " + noun4 + " until you do the " + animal + " paddle.\
+ Then you can go on to the " + nat + " stroke and the " + adjective1 + "\
+ stoke. If you learn all of these, someday you may get into the Olympics\
+  and win a/an " + color + " medal and get to do TV commercials for\
+ " + adjective2 + " companies and become as famous as " + person + ".")
+    play_again3()
+
+#lottery
+
+def replay_loto():
+    repeat_loto = input("would you like to play again? ")
+    if repeat_loto == 'yes' or repeat_loto == 'y':
+        loto()
+    elif repeat_loto == 'no' or repeat_loto == 'n':
+        print("Come back soon!")
+        home()
+    else:
+        print("Please answer 'yes' or 'no'.")
+        replay_loto()
+def loto():
+    winning_num = random.randint(1,14000000)
+    guess = input("Enter a number between 1 and 14000000 to see if you win!! ")
+    guess = int(guess)
+    if guess == winning_num:
+        print("""============================
+YOU WON!!!!!!!!!!!!!!!!!!!!
+============================
+YOU WON!!!!!!!!!!!!!!!!!!!!
+============================
+YOU WON!!!!!!!!!!!!!!!!!!!!
+============================
+The odds were 1 in 14 million!!!!""")
+    else:
+        print("looks like to it wasn't your day.")
+    replay_loto()
+
+#tab-delimited
+
+def replay_tab():
+    repeat_tab = input("would you like to use this tool again? ")
+    if repeat_tab == "yes" or repeat_tab == "y":
+        tab_delim()
+    elif repeat_tab == "no" or repeat_tab == "n":
+        home()
+    else:
+        print("Please answer 'yes' or 'no'.")
+        replay_tab()
+            
+_output = ''
+
+def addheaders():
+    global _output
+    cheader = "{:^15}".format('company')
+    rheader = "{:^15}".format('revenue')
+    eheader = "{:^15}".format('expenses')
+    pheader = "{:^15}".format('profit')
+    _output = _output + (cheader +"\t" +
+                         rheader +"\t" +
+                         eheader +"\t" +
+                         pheader + "\n")
+def addrow():
+    global _output
+    c = input("Company: ")
+    r = float(input("revenue: "))
+    e = float(input("expenses: "))
+    p = r-e
+
+    cstr = "{:<15}".format(c)
+    rstr = "{:>15,.2f}".format(r)
+    estr = "{:>15,.2f}".format(e)
+    pstr = "{:>15,.2f}".format(p)
+    newrow = cstr + "\t" + rstr + "\t" + estr + "\t" + pstr + "\n"
+
+    _output = _output + newrow
+
+    again = input("Again? Press ENTER to add a row or Q to quit. ")
+    if again.lower() != "q":
+        addrow()
+    else:
+        print(_output)
+
+
+def tab_delim():
+    print("Welcome to the tab-delimited. It's super fun.")
+    addheaders()
+    addrow()
+    replay_tab()
+
+#how many kittens
+
+def kitten_again():
+    rekit = input("Would you like to try again? ")
+    if rekit == "yes" or rekit == "y":
+        kittens()
+    elif rekit == "no" or rekit == "n":
+        home()
+    else:
+        print("Please answer 'yes' or 'no'.")
+        kitten_again()
+
+def kittens():
+    knum = random.randint(500,9000)
+    knum = str(knum)
+    kguess = input("How many kittens do you think we could have at one time? ")
+    kguess = kguess
+    if kguess == knum:
+        print("You are correct!! " + knum + " kittens!!!")
+    else:
+        print("Sorry " + knum + " kittens.")
+    kitten_again()
+
+#pick a card
+def shuffle():
+    repick = input("Would you like me to pick another card? ")
+    if repick == "yes" or repick == "y":
+        pick_card()
+    elif repick == "no" or repick == "n":
+        home()
+
+def pick_card():
+    card_raw = random.randint(1,52)
+    if card_raw == 1:
+        card = "Ace of spades"
+    elif card_raw == 2:
+        card = "Two of spades"
+    elif card_raw == 3:
+        card = "Three of spades"
+    elif card_raw == 4:
+        card = "Four of spades"
+    elif card_raw == 5:
+        card = "Five of spades"
+    elif card_raw == 6:
+        card = "Six of spades"
+    elif card_raw == 7:
+        card = "Seven of spades"
+    elif card_raw == 8:
+        card = "Eight of spades"
+    elif card_raw == 9:
+        card = "Nine of spades"
+    elif card_raw == 10:
+        card = "Ten of spades"
+    elif card_raw == 11:
+        card = "Jack of spades"
+    elif card_raw == 12:
+        card = "Queen of spades"
+    elif card_raw == 13:
+        card = "King of spades"
+    elif card_raw == 14:
+        card ="Ace of clubs"
+    elif card_raw == 15:
+        card ="Two of clubs"
+    elif card_raw == 16:
+        card ="Three of clubs"
+    elif card_raw == 17:
+        card ="Four of clubs"
+    elif card_raw == 18:
+        card ="Five of clubs"
+    elif card_raw == 19:
+        card ="Six of clubs"
+    elif card_raw == 20:
+        card ="Seven of clubs"
+    elif card_raw == 21:
+        card ="Eight of clubs"
+    elif card_raw == 22:
+        card ="Nine of clubs"
+    elif card_raw == 23:
+        card ="Ten of clubs"
+    elif card_raw == 24:
+        card ="Jack of clubs"
+    elif card_raw == 25:
+        card ="Queen of clubs"
+    elif card_raw == 26:
+        card ="King of clubs"
+    elif card_raw == 27:
+        card ="Ace of diamonds"
+    elif card_raw == 28:
+        card ="Two of diamonds"
+    elif card_raw == 29:
+        card ="Three of diamonds"
+    elif card_raw == 30:
+        card ="Four of diamonds"
+    elif card_raw == 31:
+        card ="Five of diamonds"
+    elif card_raw == 32:
+        card ="Six of diamonds"
+    elif card_raw == 33:
+        card ="Seven of diamonds"
+    elif card_raw == 34:
+        card ="Eight of diamonds"
+    elif card_raw == 35:
+        card ="Nine of diamonds"
+    elif card_raw == 36:
+        card ="Ten of diamonds"
+    elif card_raw == 37:
+        card ="Jack of diamonds"
+    elif card_raw == 38:
+        card ="Queen of diamonds"
+    elif card_raw == 39:
+        card ="King of diamonds"
+    elif card_raw == 40:
+        card ="Ace of Hearts"
+    elif card_raw == 41:
+        card ="Two of Hearts"
+    elif card_raw == 42:
+        card ="Three of Hearts"
+    elif card_raw == 43:
+        card ="Four of Hearts"
+    elif card_raw == 44:
+        card ="Five of Hearts"
+    elif card_raw == 45:
+        card ="Six of Hearts"
+    elif card_raw == 46:
+        card ="Seven of Hearts"
+    elif card_raw == 47:
+        card ="Eight of Hearts"
+    elif card_raw == 48:
+        card ="Nine of Hearts"
+    elif card_raw == 49:
+        card ="Ten of Hearts"
+    elif card_raw == 50:
+        card ="Jack of Hearts"
+    elif card_raw == 51:
+        card ="Queen of Hearts"
+    elif card_raw == 52:
+        card ="King of hearts"
+    print(card)
+    shuffle()
+
+# the game
+def rps2():
+    cpu2 = random.randint(1,3)
+    if cpu2 == 1:
+        cpu_rock2() # defined below
+    elif cpu2 == 2:
+        cpu_paper2() # defined below
+    else:
+        cpu_scissors2() # defined below
+    
+# if cpu chooses rock
+def cpu_rock2():
+    player_choice2 = input("1 for rock 2 for paper, 3 for scissors: ")
+    if player_choice2 == "1":
+        print("Tie. Rock vs rock.")
+        try_againw() # defined below
+    if player_choice2 == "2":
+        print("Win. Paper vs rock")
+        try_againw() # defined below
+    if player_choice2 == "3":
+        print("Lose. Scissors vs rock")
+        try_againw() # defined below
+    else:
+        print("Please enter '1' '2' or '3'")
+        cpu_rock2()
+
+# if cpu chooses paper
+def cpu_paper2():
+    player_choice2 = input("1 for rock, 2 for paper 3 for scissors: ")
+    if player_choice2 == "1":
+        print("Lose. Rock vs paper.")
+        try_againw() # defined below
+    if player_choice2 == "2":
+        print("Tie. Paper vs paper")
+        try_againw() # defined below
+    if player_choice2 == "3":
+        print("Win. Scissors vs paper")
+        try_againw() # defined below
+    else:
+        print("Please enter '1' '2' or '3'")
+        cpu_paper2()
+
+# if cpu chooses scissors
+def cpu_scissors2():
+    player_choice2 = input("1 for rock, 2 for paper, 3 for scissors ")
+    if player_choice2 == "1":
+        print("Win. Rock vs scissors.")
+        try_againw() # defined below
+    if player_choice2 == "2":
+        print("Lose. Paper vs scissors")
+        try_againw() # defined below
+    if player_choice2 == "3":
+        print("Tie. Scissors vs scissors")
+        try_againw() # defined below
+    else:
+        print("Please enter '1' '2' or '3'")
+        cpu_scissors2()
+
+# try again function
+def try_againw():
+    choice2 = input("Would you like to play again? ")
+    if choice2 == "y" or choice2 == "yes":
+        rps2()
+    elif choice2 == "n" or choice2 =="no":
+        home()
+    else:
+        print("Please answer 'yes' or 'no'")
+        try_againw()
+
+#tax calculator
+def replay_tax():
+    repeat_tax = input("Would you like to make another calculation? ")
+    if repeat_tax == "yes" or repeat_tax == "y":
+        tax_calc()
+    elif repeat_tax == "no" or repeat_tax == "n":
+        home()
+    else:
+        print("Please enter 'yes' or 'no'.")
+        replay_tax()
+def tax_calc():
+    price = float(input("What is the price?(just enter a number) "))
+    tax_in = float(input("What is the tax/tip?(just enter a number) "))
+    tax_real = tax_in/100
+    tax = price * tax_real
+    total = tax + price
+    print("Your total is " + str(total))
+    replay_tax()
+
+#temp convert
+
+
+def temp_choose():
+    temp_way = input("""'1' for cel to fah
+'2' for fah to cel
+'0' To exit
+""")
+    if temp_way == "1":
+        convert_cel()
+    elif temp_way == "2":
+        convert_fa()
+    elif temp_way == "0":
+        home()
+    else:
+        print("Not a valid input.")
+        temp_choose()
+        
+def convert_cel():
+    
+    cel = float(input("Enter temp in celsius: "))
+    fa = cel * 9/5 +32
+    print(str(cel) + " celsius = " + str(fa) +" fahrenheit.")
+    temp_choose()
+
+def convert_fa():
+    
+    fa = float(input("Enter temp in fahrenheit: "))
+    cel = (fa -32) / 1.8
+    print(str(fa) + " fahrenheit = " + str(cel) +" celsius.")
+    temp_choose()
+
+#idea jar
+
+def replay_idea():
+    repeat_idea = input("Would you like another phrase? ")
+    if repeat_idea == "yes" or repeat_idea == "y":
+        idea_jar()
+    elif repeat_idea == "no" or repeat_idea == "n":
+        home()
+    else:
+        print("Please answer 'yes' or 'no'.")
+        replay_idea()
+def idea_jar():
+    ad1 = random.randint(1,7)
+    if ad1 == 1:
+        ad ="tall"
+    elif ad1 == 2:
+        ad ="smart"
+    elif ad1 == 3:
+        ad ="loud"
+    elif ad1 == 4:
+        ad ="pink"
+    elif ad1 == 5:
+        ad ="creepy"
+    elif ad1 == 6:
+        ad ="old"
+    elif ad1 == 7:
+        ad ="flaming"
+    verb1 = random.randint(1,7)
+    if verb1 == 1:
+        verb ="swimming"
+    elif verb1 == 2:
+        verb ="flying"
+    elif verb1 == 3:
+        verb = "cooking"
+    elif verb1 == 4:
+        verb ="singing"
+    elif verb1 == 5:
+        verb ="digging"
+    elif verb1 == 6:
+        verb ="hacking"
+    elif verb1 == 7:
+        verb ="falling"
+    noun1 = random.randint(1,7)
+    if noun1 == 1:
+        noun ="bird"
+    elif noun1==2:
+        noun = "car"
+    elif noun1 ==3:
+        noun = "pencil"
+    elif noun1 == 4:
+        noun ="baby"
+    elif noun1 == 5:
+        noun = "hippo"
+    elif noun1 == 6:
+        noun ="man"
+    elif noun1 == 7:
+        noun ="shoe"
+    
+    result = ad + " " + verb + " " + noun + "."
+    print(result)
+    replay_idea()
+
+#mile to kilometer converter
+
+def unit_choose():
+    unitchoice = input("""
+'1' For km to mi
+'2' For mi to km
+'0' To exit
+""")
+    if unitchoice == "1":
+        km_to_mi()
+    elif unitchoice == "2":
+        mi_to_km()
+    elif unitchoice == "0":
+        home()
+    else:
+        print("Not a valid input.")
+        unit_choose()
+def km_to_mi():
+    km = float(input("How many kilomiters "))
+    result = (km *.62137119)
+    result = round(result)
+    print(str(km) + " kilometers is approximatly " + str(result) + " miles.")
+    unit_choose()
+def mi_to_km():
+    mi = float(input("How many miles "))
+    result = (mi / .62137119)
+    result = round(result)
+    print (str(mi) + " miles is approximatly " + str(result) + " kilometers.")
+    unit_choose()
+
+login()
+
